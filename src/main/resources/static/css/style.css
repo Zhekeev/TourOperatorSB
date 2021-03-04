@@ -1,0 +1,103 @@
+h2{
+    font-size: 30px;
+    background: -webkit-linear-gradient(#006BA8, #00AFA5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-d{
+    font-size: 15px;
+}
+
+.button-login-for-login-page{
+    background: linear-gradient(to bottom right, #0085FF, #0092B2);
+    margin-top: 43px;
+    display: block;
+    font-size: 23px;
+    color: white;
+    text-align: center;
+    padding: 9px 20px;
+    border-radius: 140px;
+    width: 250px;
+    height: 60px;
+}
+
+.navbar{
+    background: linear-gradient(to bottom right, #036AA4, #0F8FAB);
+}
+
+.navbar-brand-logo{
+    margin-left: 100px;
+}
+
+.brand-name{
+    margin-left: 10px;
+    width: 120px;
+    height: 35px;
+}
+
+.nav-link{
+    margin-left: 100px;
+}
+
+.telephone{
+    margin-left: 130px;
+}
+
+.login-input{
+    width: 700px;
+    height: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -125px 0 0 -200px;
+}
+
+.login-text-login-page{
+    width: 700px;
+    height: 500px;
+    margin: 30px 0 0px 450px;
+}
+
+.login-page-login{
+    margin-right: 25px;
+}
+
+.log-in{
+    width: 25px;
+    height: 25px;
+    margin-top: 10px;
+    margin-left: 80px;
+}
+
+.profile-href{
+    margin-top: 10px;
+    margin-left: 70px;
+}
+
+.hr-home{
+    margin-top: 25px;
+}
+
+.profile-container{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.row{
+    margin-top: 25px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.panel-title {
+    font-weight: bold;
+}
+.pl-ziro { padding-left: 0px; }
+
+#map{
+    width: 100%;
+    height: 400px;
+}
