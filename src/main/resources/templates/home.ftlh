@@ -73,6 +73,7 @@
     </#list>
     </div>
     </div>
+    <div class="mt-25px">
     <@p.pager url page/>
-
+    </div>
 </@c.page>

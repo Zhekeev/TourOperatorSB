@@ -20,7 +20,7 @@
                     <div class="card-body">
                         <div class="btn-group-vertical">
                                 <a href="/user/settings" class="btn btn-outline-primary">Настройка аккаунта</a>
-                                <a href="/user/text" class="btn btn-outline-primary">Мои сообщения</a>
+                                <#--<a href="/user/text" class="btn btn-outline-primary">Мои сообщения</a>-->
                                 <a href="/user/bank" class="btn btn-outline-success">Банк</a>
                             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Удалить аккаунт

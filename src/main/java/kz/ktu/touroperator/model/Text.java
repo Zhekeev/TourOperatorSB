@@ -14,10 +14,11 @@ public class Text {
 
     private String text;
 
-    @OneToOne(mappedBy = "textForAdmin")
-    private TextForUser textForUser;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="admin_id", referencedColumnName = "id")
+    private User admin;
 }

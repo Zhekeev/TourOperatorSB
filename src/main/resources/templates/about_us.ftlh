@@ -11,28 +11,11 @@
             </div>
 
             <div class="col">
-                <h3>My Google Maps Demo</h3>
-                <!--The div element for the map -->
-                <div id="map"></div>
+                <h3>Как проехать</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5588.9286571883!2d73.10201923503071!3d49.81395111019249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424346e496c789ff%3A0xbf6b602f3acf7ee1!2z0prQsNGA0LDSk9Cw0L3QtNGLINC80LXQvNC70LXQutC10YLRgmnQuiDRgtC10YXQvdC40LrQsNC70YvSmyDRg9C90LjQstC10YDRgdC40YLQtdGCaQ!5e0!3m2!1skk!2skz!4v1614926106948!5m2!1skk!2skz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
+            <div>
         </div>
     </div>
 </div>
-    <script>
-        function initMap() {
-            const uluru = { lat: 49.81862411584706, lng: 73.10437201720188 };
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 50,
-                center: uluru,
-            });
-            const marker = new google.maps.Marker({
-                position: uluru,
-                map: map,
-            });
-        }
-    </script>
-    <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV2ccHc_wsC7wGRxbeuM13j3qAzKWDXrs&callback=initMap&libraries=&v=weekly"
-            async
-    ></script>
 </@c.page>

@@ -25,7 +25,7 @@ public class Bank {
     private Long cardSecretNumber;
 
     @Column(name = "money_on_card")
-    private BigDecimal moneyOnCard;
+    private BigDecimal moneyOnCard = new BigDecimal(0);
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", referencedColumnName = "id")

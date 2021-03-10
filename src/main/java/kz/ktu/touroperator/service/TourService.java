@@ -1,5 +1,7 @@
 package kz.ktu.touroperator.service;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import kz.ktu.touroperator.model.*;
 import kz.ktu.touroperator.repository.BankRepository;
 import kz.ktu.touroperator.repository.ContractRepository;
@@ -8,9 +10,12 @@ import kz.ktu.touroperator.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -25,13 +30,17 @@ public class TourService {
     private final CountryRepository countryRepository;
     private final BankRepository bankRepository;
     private final ContractRepository contractRepository;
+    private final MailSender mailSender;
+    private final UserService userService;
 
     @Autowired
-    public TourService(TourRepository tourRepository, CountryRepository countryRepository, BankRepository bankRepository, ContractRepository contractRepository) {
+    public TourService(TourRepository tourRepository, CountryRepository countryRepository, BankRepository bankRepository, ContractRepository contractRepository, MailSender mailSender, UserService userService) {
         this.tourRepository = tourRepository;
         this.countryRepository = countryRepository;
         this.bankRepository = bankRepository;
         this.contractRepository = contractRepository;
+        this.mailSender = mailSender;
+        this.userService = userService;
     }
 
     public Tour saveTour(String name, String description,
@@ -70,16 +79,42 @@ public class TourService {
         return "";
     }
 
-    public void buyTour(Long id, User user){
+    public void buyTour(Long id, User user) throws FileNotFoundException, DocumentException {
         Tour tour = tourRepository.findTourById(id);
         Contract contract = new Contract();
         contract.setUser(user);
         contract.setTour(tour);
+        generateDoc(tour);
         BigDecimal tourPrice = tour.getPrice();
         Bank bank = bankRepository.findByUser(user);
         BigDecimal userCash = bank.getMoneyOnCard();
+        if(userCash == null){
+            userCash = new BigDecimal(0);
+        }
         userCash = userCash.subtract(tourPrice);
         bankRepository.setCash(user.getId(), userCash);
         contractRepository.save(contract);
+        userService.sendMessage(user);
+    }
+
+    public void generateDoc(Tour tour) throws FileNotFoundException, DocumentException {
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream("test.pdf"));
+        document.open();
+        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+        Chunk chunk = new Chunk("Название тура " + tour.getName(), font);
+        document.add(chunk);
+        document.close();
+    }
+
+    public void sendMessage(User user, Document document) throws FileNotFoundException, DocumentException {
+        if (!StringUtils.isEmpty(user.getEmail())) {
+            String message = String.format(
+                    "Hello, %s! \n" +
+                            "Welcome to Sweater. Please, visit next link: http://localhost:8080/activate",
+                    user.getUsername()
+            );
+            mailSender.send(user.getEmail(), "Activation code", message);
+        }
     }
 }

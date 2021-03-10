@@ -40,6 +40,10 @@ public class BankService {
     public BigDecimal getUserCash(User user){
         Bank bank = bankRepository.findByUser(user);
         BigDecimal userCash = bank.getMoneyOnCard();
+        if(userCash == null){
+            userCash = new BigDecimal(0);
+            return userCash;
+        }
         return userCash;
     }
 

@@ -2,6 +2,7 @@ package kz.ktu.touroperator.controller;
 
 import kz.ktu.touroperator.model.*;
 import kz.ktu.touroperator.repository.*;
+import kz.ktu.touroperator.service.AdminService;
 import kz.ktu.touroperator.service.TextService;
 import kz.ktu.touroperator.service.TourService;
 import org.springframework.data.domain.Page;
@@ -17,10 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.util.Arrays;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -33,8 +31,9 @@ public class AdminController {
     private final TourService tourService;
     private final TextRepository textRepository;
     private final TextService textService;
+    private final AdminService adminService;
 
-    public AdminController(TourRepository tourRepository, CountryRepository countryRepository, UserRepository userRepository, ContractRepository contractRepository, TourService tourService, TextRepository textRepository, TextService textService) {
+    public AdminController(TourRepository tourRepository, CountryRepository countryRepository, UserRepository userRepository, ContractRepository contractRepository, TourService tourService, TextRepository textRepository, TextService textService, AdminService adminService) {
         this.tourRepository = tourRepository;
         this.countryRepository = countryRepository;
         this.userRepository = userRepository;
@@ -42,6 +41,7 @@ public class AdminController {
         this.tourService = tourService;
         this.textRepository = textRepository;
         this.textService = textService;
+        this.adminService = adminService;
     }
 
 
@@ -105,19 +105,7 @@ public class AdminController {
                              @RequestParam Map<String,String> form,
                              @RequestParam("userId") User user)
     {
-        user.setUsername(username);
-        Set<String> roles = Arrays.stream(Role.values())
-                .map(Role::name)
-                .collect(Collectors.toSet());
-
-        user.getRoles().clear();
-
-        for (String key : form.keySet()){
-            if(roles.contains(key)){
-                user.getRoles().add(Role.valueOf(key));
-            }
-        }
-        userRepository.save(user);
+        adminService.updateUser(username, form, user);
         return "redirect:/user";
     }
 

@@ -1,5 +1,6 @@
 package kz.ktu.touroperator.controller;
 
+import com.itextpdf.text.DocumentException;
 import kz.ktu.touroperator.model.*;
 import kz.ktu.touroperator.repository.*;
 import kz.ktu.touroperator.service.BankService;
@@ -8,9 +9,13 @@ import kz.ktu.touroperator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
@@ -41,9 +46,10 @@ public class UserController {
 
     @GetMapping("/profile")
     public String getProfile(@AuthenticationPrincipal User user, Model model){
+        User user1 = userRepository.findByUsername(user.getUsername());
         List<Contract> contracts = contractService.getUserAllContract(user);
         model.addAttribute("contracts",contracts);
-        model.addAttribute("user", user);
+        model.addAttribute("user", user1);
         return "profile";
     }
 
@@ -53,6 +59,27 @@ public class UserController {
         return "user_account_setting";
     }
 
+    @PostMapping("/edit")
+    public String updateUser(@RequestParam String firstName,
+                             @RequestParam String lastName,
+                             @RequestParam String email,
+                             @RequestParam String phoneNumber,
+                             @RequestParam String street,
+                             @RequestParam String houseNumber,
+                             @RequestParam String apartmentNumber,
+                                  @AuthenticationPrincipal User user) throws FileNotFoundException, DocumentException {
+        userRepository.update(user.getId(),firstName, lastName, email, phoneNumber, street, houseNumber, apartmentNumber);
+        return "redirect:/user/profile";
+    }
+
+    @PostMapping("/password/edit")
+    public String updateUserPassword(@RequestParam String password,
+                                     @RequestParam String verificationPassword,
+                             @AuthenticationPrincipal User user) {
+        userRepository.updatePassword(user.getId(), password);
+        return "redirect:/user/profile";
+    }
+
     @PostMapping("/text")
     public String writeToTheAdmin(@RequestParam String text,
                                   @AuthenticationPrincipal User user) {
@@ -60,13 +87,13 @@ public class UserController {
        return "redirect:/user/profile";
     }
 
-    /*@GetMapping("/text")
+    @GetMapping("/text")
     private String getAllText(Model model,
                               @AuthenticationPrincipal User user){
         List<TextForUser> texts = textForUserRepository.findAllByUser(user);
         model.addAttribute("users", texts);
-        return "user_texts";
-    }*/
+        return "texts_for_user";
+    }
 
     @GetMapping("/bank")
     public String getBankPage(@AuthenticationPrincipal User user, Model model){

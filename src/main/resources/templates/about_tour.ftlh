@@ -9,6 +9,7 @@
                     <p>${tour.description}</p>
                     <span>${tour.price}</span>
                 </div>
+
                 <div class="button-page">
                     <button type="button" class="button-login-for-login-page" data-bs-toggle="modal" data-bs-target="#forTour" style="color: white">
                         Купить
@@ -25,6 +26,7 @@
                                 <div class="modal-body">
                                     <div class="alert <#if cash_error??>alert-danger<#else>alert-info</#if>" role="alert">
                                         <#if cash_error??>Вам не хватает средств для покупки тура<#else>Подтвердите покупку тура</#if>
+                                        <#if user_error??>Войдите или зарегайтесь</#if>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -38,6 +40,7 @@
                     </div>
                    <#-- <a href="/tour/buy/${tour.id}" class="button-login-for-login-page" style="color: white">Купить тур</a>-->
                 </div>
+
             </div>
             <div class="col">
                 <!-- Button trigger modal -->

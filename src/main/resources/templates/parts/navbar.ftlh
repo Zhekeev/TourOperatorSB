@@ -14,6 +14,9 @@
                     <a class="nav-link" aria-current="page" href="/" style=" color: white;">Домой</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/tour/all" style=" color: white;">Туры</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/contacts" style=" color: white;">Контакты</a>
                 </li>
                 <li class="nav-item">

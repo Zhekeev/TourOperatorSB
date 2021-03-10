@@ -1,5 +1,6 @@
 package kz.ktu.touroperator.controller;
 
+import com.itextpdf.text.DocumentException;
 import kz.ktu.touroperator.model.Tour;
 import kz.ktu.touroperator.model.User;
 import kz.ktu.touroperator.repository.TourRepository;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 
 @Controller
@@ -58,6 +60,9 @@ public class TourController {
         Tour tour = tourRepository.findTourById(id);
         BigDecimal userCash = bankService.getUserCash(user);
         BigDecimal tourPrice = tour.getPrice();
+        if(userCash == null){
+            model.addAttribute("user_error", userCash);
+        }
         if (tourPrice.compareTo(userCash) >= 0) {
             model.addAttribute("cash_error", userCash);
         }
@@ -67,7 +72,7 @@ public class TourController {
 
     @GetMapping("/buy/{id}")
     public String buyTour(@PathVariable(value = "id") Long id,
-                          @AuthenticationPrincipal User user) {
+                          @AuthenticationPrincipal User user) throws FileNotFoundException, DocumentException {
         tourService.buyTour(id, user);
         return "redirect:/user/profile";
     }
