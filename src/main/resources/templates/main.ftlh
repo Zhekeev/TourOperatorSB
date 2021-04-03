@@ -13,7 +13,8 @@
                 <form method="post" enctype="multipart/form-data">
                     <div class="input-group mt-1 mb-3">
                         <span class="input-group-text" id="basic-addon2">Название</span>
-                        <input type="text" name="text" class="form-control" placeholder="Название тура" aria-describedby="basic-addon2">
+                        <input type="text" name="text" class="form-control" placeholder="Название тура"
+                               aria-describedby="basic-addon2">
                     </div>
                     <div class="input-group mt-2 mb-3">
                         <span class="input-group-text">Описание тура</span>
@@ -26,9 +27,11 @@
                         <input type="date" name="date" class="form-control" placeholder="Дата тура">
                     </div>
                     <div class="input-group mt-1 mb-3">
-                        <span class="input-group-text">Продолжительность</span>
-                        <input type="text" name="numberOfDays" class="form-control" placeholder="Продолжительность тура">
-                        <span class="input-group-text">Количество людей</span>
+                        <span class="input-group-text"><img src="/static/img/calendar.png" width="22"
+                                                            height="22"></span>
+                        <input type="text" name="numberOfDays" class="form-control" placeholder="Продолжительность">
+                        <span class="input-group-text"><img src="/static/img/user/two-persons-silhouettes.png"
+                                                            width="22" height="22"></span>
                         <input type="text" name="numberOfPeople" class="form-control" placeholder="Количество людей">
                     </div>
                     <div class="input-group mt-1 mb-3">
@@ -45,43 +48,17 @@
                 </form>
             </div>
             <div class="col">
-                    <div class="mt-2">
-                        <h1 class="display-7">Сменить пароль</h1>
-                    </div>
-                    <div>
-                        <a href="/admin/user/all" class="btn btn-outline-primary">Настройка пользователей</a>
-                    </div>
-                    <div>
-                        <a href="/admin/user/text" class="btn btn-outline-primary">Сообщений пользователей</a>
-                    </div>
+                <div class="mt-2">
+                    <h1 class="display-7">Сменить пароль</h1>
+                </div>
+                <div>
+                    <a href="/admin/user/all" class="btn btn-outline-primary">Настройка пользователей</a>
+                </div>
+                <div>
+                    <a href="/admin/user/text" class="btn btn-outline-primary">Сообщений пользователей</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div>
-        <form method="post" enctype="multipart/form-data">
-            <input type="text" name="text" placeholder="Введите название тура">
-            <input type="text" name="description" placeholder="Введите описание тура">
-            <input type="text" name="priceFromFront" placeholder="Введите цену тура">
-            <input type="date" name="date" placeholder="Введите дату тура">
-            <input type="text" name="numberOfDays" placeholder="Введите продолжительность тура">
-            <input type="text" name="numberOfPeople" placeholder="Введите количество человек тура">
-            <input type="file" name="file">
-            <label>Country</label>
-            <select name="name">
-                <#list countries as country>
-                    <option>${country.name}</option>
-                </#list>
-            </select>
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <button type="submit">Добавить</button>
-        </form>
-        <div>
-            Поиск по названию тура
-        </div>
-        <form method="get" action="/main">
-            <input type="text" name="name" placeholder="Введите название тура" value="${filter?ifExists}">
-            <button type="submit">Найти</button>
-        </form>
     </div>
     <div>
         Список туров

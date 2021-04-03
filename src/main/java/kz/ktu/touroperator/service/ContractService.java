@@ -20,6 +20,6 @@ public class ContractService {
     }
 
     public List<Contract> getUserAllContract(User user){
-        return contractRepository.findByUser(user);
+        return contractRepository.findByUserOrderByPurchaseDateDesc(user);
     }
 }

@@ -1,3 +1,9 @@
+/*
+body{
+    background: -webkit-linear-gradient(#006BA8, #00AFA5);
+}
+*/
+
 h2{
     font-size: 30px;
     background: -webkit-linear-gradient(#006BA8, #00AFA5);
@@ -7,6 +13,14 @@ h2{
 
 .text-d{
     font-size: 15px;
+}
+
+.table{
+    margin-bottom: 100px;
+}
+
+.cheque-button{
+    margin-left: 1500px;
 }
 
 .button-login-for-login-page{

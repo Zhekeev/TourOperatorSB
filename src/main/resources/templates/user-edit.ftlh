@@ -10,10 +10,10 @@
                         <div class="card-body">
                             Логин
                             <div>
-                            <input type="text" value="${user.username}" name="username">
+                                <input type="text" value="${user.username}" name="username">
                             </div>
                             <div>
-                            <input type="password" name="password">
+                                <input type="password" name="password">
                             </div>
                         </div>
                     </div>
@@ -21,7 +21,9 @@
                         Роли
                         <#list roles as role>
                             <div>
-                                <label><input type="checkbox" name="${role}" ${user.roles?seq_contains(role)?string("checked", "")}>${role}</label>
+                                <label><input type="checkbox"
+                                              name="${role}" ${user.roles?seq_contains(role)?string("checked", "")}>${role}
+                                </label>
                             </div>
                         </#list>
                         <input type="hidden" value="${user.id}" name="userId">

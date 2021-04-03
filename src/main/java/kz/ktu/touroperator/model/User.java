@@ -59,9 +59,6 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Text> texts;
 
-    @OneToMany(mappedBy = "user",  fetch = FetchType.LAZY)
-    private List<TextForUser> answer;
-
     @OneToOne(mappedBy = "user")
     private Bank bank;
 

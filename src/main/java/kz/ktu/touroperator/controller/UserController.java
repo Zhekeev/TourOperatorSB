@@ -27,19 +27,17 @@ public class UserController {
     private final ContractService contractService;
     private final TourRepository tourRepository;
     private final TextRepository textRepository;
-    private final TextForUserRepository textForUserRepository;
     private final BankRepository bankRepository;
     private final BankService bankService;
 
     @Autowired
-    public UserController(UserRepository userRepository, UserService userService, ContractRepository contractRepository, ContractService contractService, TourRepository tourRepository, TextRepository textRepository, TextForUserRepository textForUserRepository, BankRepository bankRepository, BankService bankService) {
+    public UserController(UserRepository userRepository, UserService userService, ContractRepository contractRepository, ContractService contractService, TourRepository tourRepository, TextRepository textRepository, BankRepository bankRepository, BankService bankService) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.contractRepository = contractRepository;
         this.contractService = contractService;
         this.tourRepository = tourRepository;
         this.textRepository = textRepository;
-        this.textForUserRepository = textForUserRepository;
         this.bankRepository = bankRepository;
         this.bankService = bankService;
     }
@@ -55,7 +53,8 @@ public class UserController {
 
     @GetMapping("/settings")
     public String getSettingPage(@AuthenticationPrincipal User user, Model model){
-        model.addAttribute("user", user);
+        User currentUser = userRepository.findByUsername(user.getUsername());
+        model.addAttribute("user", currentUser);
         return "user_account_setting";
     }
 
@@ -67,7 +66,7 @@ public class UserController {
                              @RequestParam String street,
                              @RequestParam String houseNumber,
                              @RequestParam String apartmentNumber,
-                                  @AuthenticationPrincipal User user) throws FileNotFoundException, DocumentException {
+                                  @AuthenticationPrincipal User user){
         userRepository.update(user.getId(),firstName, lastName, email, phoneNumber, street, houseNumber, apartmentNumber);
         return "redirect:/user/profile";
     }
@@ -85,14 +84,6 @@ public class UserController {
                                   @AuthenticationPrincipal User user) {
        userService.textToAdmin(text, user);
        return "redirect:/user/profile";
-    }
-
-    @GetMapping("/text")
-    private String getAllText(Model model,
-                              @AuthenticationPrincipal User user){
-        List<TextForUser> texts = textForUserRepository.findAllByUser(user);
-        model.addAttribute("users", texts);
-        return "texts_for_user";
     }
 
     @GetMapping("/bank")

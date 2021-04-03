@@ -17,8 +17,4 @@ public class Text {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="admin_id", referencedColumnName = "id")
-    private User admin;
 }

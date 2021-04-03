@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ContractRepository extends JpaRepository<Contract, Long> {
-    List<Contract> findByUser(User user);
+    List<Contract> findByUserOrderByPurchaseDateDesc(User user);
 
 }

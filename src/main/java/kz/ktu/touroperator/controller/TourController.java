@@ -55,8 +55,16 @@ public class TourController {
 
     @GetMapping("/about/{id}")
     public String aboutTour(@PathVariable(value = "id") Long id,
-                            @AuthenticationPrincipal User user,
                             Model model) {
+        Tour tour = tourRepository.findTourById(id);
+        model.addAttribute("tour", tour);
+        return "about_tour";
+    }
+
+    @GetMapping("/cheque/{id}")
+    public String getChequePage(@PathVariable(value = "id") Long id,
+                                @AuthenticationPrincipal User user,
+                                Model model){
         Tour tour = tourRepository.findTourById(id);
         BigDecimal userCash = bankService.getUserCash(user);
         BigDecimal tourPrice = tour.getPrice();
@@ -67,7 +75,7 @@ public class TourController {
             model.addAttribute("cash_error", userCash);
         }
         model.addAttribute("tour", tour);
-        return "about_tour";
+        return "cheque";
     }
 
     @GetMapping("/buy/{id}")

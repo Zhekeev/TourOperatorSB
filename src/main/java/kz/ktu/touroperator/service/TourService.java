@@ -94,7 +94,7 @@ public class TourService {
         userCash = userCash.subtract(tourPrice);
         bankRepository.setCash(user.getId(), userCash);
         contractRepository.save(contract);
-        userService.sendMessage(user);
+       /* userService.sendMessage(user);*/
     }
 
     public void generateDoc(Tour tour) throws FileNotFoundException, DocumentException {

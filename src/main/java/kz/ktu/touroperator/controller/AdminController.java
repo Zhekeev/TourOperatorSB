@@ -1,6 +1,9 @@
 package kz.ktu.touroperator.controller;
 
-import kz.ktu.touroperator.model.*;
+import kz.ktu.touroperator.model.Country;
+import kz.ktu.touroperator.model.Role;
+import kz.ktu.touroperator.model.Tour;
+import kz.ktu.touroperator.model.User;
 import kz.ktu.touroperator.repository.*;
 import kz.ktu.touroperator.service.AdminService;
 import kz.ktu.touroperator.service.TextService;
@@ -43,8 +46,7 @@ public class AdminController {
         this.textService = textService;
         this.adminService = adminService;
     }
-
-
+    
     @GetMapping()
     public String getMainPage(@RequestParam(required = false, defaultValue = "") String name, Model model,
                               @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, value = 8) Pageable pageable) {
@@ -74,7 +76,6 @@ public class AdminController {
             @RequestParam("file") MultipartFile file,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, value = 8) Pageable pageable)
             throws IOException {
-
         Date tourDate = Date.valueOf(date);
         BigDecimal price = BigDecimal.valueOf(Integer.valueOf(priceFromFront));
         tourService.saveTour(text, description, price, tourDate, numberOfDays, numberOfPeople, name, file);
@@ -102,9 +103,8 @@ public class AdminController {
 
     @PostMapping("/user/edit")
     public String userUpdate(@RequestParam String username,
-                             @RequestParam Map<String,String> form,
-                             @RequestParam("userId") User user)
-    {
+                             @RequestParam Map<String, String> form,
+                             @RequestParam("userId") User user) {
         adminService.updateUser(username, form, user);
         return "redirect:/user";
     }
@@ -120,13 +120,5 @@ public class AdminController {
     public String userText(Model model) {
         model.addAttribute("users", textRepository.findAll());
         return "user_texts";
-    }
-
-    @PostMapping("/user/text/answer/user/{user_id}/text/{text_id}")
-    public String answerUserText(@PathVariable(value = "user_id") Long userId,
-                                 @PathVariable(value = "text_id") Long textId,
-                                 String text) {
-        textService.sendText(userId,textId,text);
-        return "redirect:/admin/user/text";
     }
 }

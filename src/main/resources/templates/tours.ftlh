@@ -8,7 +8,8 @@
     </div>
     <form method="get" action="/tour/all">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" name="name" value="${filter?ifExists}" placeholder="Поиск по названию тура">
+            <input type="text" class="form-control" name="name" value="${filter?ifExists}"
+                   placeholder="Поиск по названию тура">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="submit">Поиск</button>
             </div>

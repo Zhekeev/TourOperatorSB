@@ -3,8 +3,8 @@
 
 <@c.page>
     <div class="login-text-login-page">
-    <img class="log-in-image" src="/static/img/Adelaide.png">
-    <h2>Вход</h2>
+        <img class="log-in-image" src="/static/img/Adelaide.png">
+        <h2>Вход</h2>
     </div>
-<@i.login "/login" false/>
+    <@i.login "/login" false/>
 </@c.page>
