@@ -2,6 +2,10 @@
     <form action="${path}" method="post">
         <div class="login-input">
             <div class="form-group">
+                <div class="login-text-login-page">
+                    <img class="log-in-image" src="/static/img/Adelaide.png">
+                </div>
+                <h2 class="login-input-label">Вход</h2>
                 <label for="exampleInputEmail1">Логин</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="username" aria-describedby="emailHelp"
@@ -62,6 +66,7 @@
                 </div>
             </#if>
             <div>
+                </br>
                 <#if !isRegistredForm><span>У вас нету аккаунта? <a href="/registration">Создать</a></span></#if>
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                 </br>

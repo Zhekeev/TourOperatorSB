@@ -33,9 +33,12 @@
                 </#if>
                 <#if user??>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/user/profile" style=" color: white;"><b>Welcome, ${userFirstName} ${userLastName}</b></a>
+                        <a class="nav-link active" aria-current="page" href="/user/profile" style=" color: white;"><b>${userFirstName} ${userLastName}</b></a>
                     </li>
                 </#if>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/user/profile" style=" color: white;">+7 707 597 84 34</a>
+                </li>
                 <li class="nav-item">
                     <@i.logout/>
                 </li>

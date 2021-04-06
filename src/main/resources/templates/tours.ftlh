@@ -7,11 +7,38 @@
         <h2>Все туры</h2>
     </div>
     <form method="get" action="/tour/all">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" name="name" value="${filter?ifExists}"
-                   placeholder="Поиск по названию тура">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit">Поиск</button>
+        <div class="container" style="margin-top: 45px;">
+            <div class="row">
+                <div class="col">
+                    <div class="mt-2">
+                        <h1 class="display-6">Поиск тура</h1>
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="input-group mt-1 mb-3">
+                            <span class="input-group-text" id="basic-addon2">Откуда</span>
+                            <select name="nameFrom" class="form-select" id="selectTour" disabled>
+                                    <option>Караганда</option>
+                            </select>
+                            <span class="input-group-text" id="basic-addon2">Куда</span>
+                            <select name="nameTo" class="form-select" id="selectCountry">
+                                <#list countries as country>
+                                    <option>${country.name}</option>
+                                </#list>
+                            </select>
+                            <span class="input-group-text">Дата началы</span>
+                            <input type="date" name="date" class="form-control" placeholder="Дата тура">
+                            <div class="input-group mt-1 mb-3">
+                            <span class="input-group-text">Персон</span>
+                            <input type="text" name="numberOfPeople" class="form-control" value="2">
+                            <span class="input-group-text">Продолжительность</span>
+                            <input type="text" name="numberOfDays" class="form-control" value="10">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit">Поиск</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </form>

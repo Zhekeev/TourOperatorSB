@@ -46,7 +46,7 @@ public class AdminController {
         this.textService = textService;
         this.adminService = adminService;
     }
-    
+
     @GetMapping()
     public String getMainPage(@RequestParam(required = false, defaultValue = "") String name, Model model,
                               @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, value = 8) Pageable pageable) {
