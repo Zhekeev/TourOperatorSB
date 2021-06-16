@@ -98,4 +98,10 @@ public class TourController {
         tourService.buyTour(id, user);
         return "redirect:/user/profile";
     }
+
+    @GetMapping("/contract/activate/{code}")
+    public String activate(@PathVariable String code) {
+        tourService.confirmPurchase(code);
+        return "redirect:/user/profile";
+    }
 }

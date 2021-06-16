@@ -5,10 +5,26 @@ body{
 */
 
 h2{
-    font-size: 30px;
-    background: -webkit-linear-gradient(#006BA8, #00AFA5);
+    font-size: 40px;
+    background: -webkit-linear-gradient(#006b84, #3456ef);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+b{
+    font-size: 18px;
+}
+
+.tour_about{
+    font-size: 15px;
+}
+
+.home-text{
+    font-size: 20px;
+}
+
+.row{
+    margin-right: 56px;
 }
 
 .text-d{
@@ -41,7 +57,7 @@ h2{
 }
 
 .navbar-brand-logo{
-    margin-left: 100px;
+    margin-left: 315px;
 }
 
 .brand-name{
@@ -64,7 +80,7 @@ h2{
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -400px 0 0 -200px;
+    margin: -350px 0 0 -200px;
 }
 
 .login-text-login-page{

@@ -1,3 +1,4 @@
+
 <#assign
 known = Session.SPRING_SECURITY_CONTEXT??
 >
@@ -8,8 +9,6 @@ known = Session.SPRING_SECURITY_CONTEXT??
     name = user.getUsername()
     isAdmin = user.isAdmin()
     currentUserId = user.getId()
-    userFirstName = user.getFirstName()
-    userLastName = user.getLastName()
     >
 <#else>
     <#assign

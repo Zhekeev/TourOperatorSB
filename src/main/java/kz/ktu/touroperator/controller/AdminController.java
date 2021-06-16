@@ -8,6 +8,7 @@ import kz.ktu.touroperator.repository.*;
 import kz.ktu.touroperator.service.AdminService;
 import kz.ktu.touroperator.service.TextService;
 import kz.ktu.touroperator.service.TourService;
+import kz.ktu.touroperator.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -35,8 +36,9 @@ public class AdminController {
     private final TextRepository textRepository;
     private final TextService textService;
     private final AdminService adminService;
+    private final UserService userService;
 
-    public AdminController(TourRepository tourRepository, CountryRepository countryRepository, UserRepository userRepository, ContractRepository contractRepository, TourService tourService, TextRepository textRepository, TextService textService, AdminService adminService) {
+    public AdminController(TourRepository tourRepository, CountryRepository countryRepository, UserRepository userRepository, ContractRepository contractRepository, TourService tourService, TextRepository textRepository, TextService textService, AdminService adminService, UserService userService) {
         this.tourRepository = tourRepository;
         this.countryRepository = countryRepository;
         this.userRepository = userRepository;
@@ -45,6 +47,7 @@ public class AdminController {
         this.textRepository = textRepository;
         this.textService = textService;
         this.adminService = adminService;
+        this.userService = userService;
     }
 
     @GetMapping()
@@ -69,16 +72,19 @@ public class AdminController {
             @RequestParam String text,
             @RequestParam String description,
             @RequestParam String priceFromFront,
-            @RequestParam String date,
+            @RequestParam Date date,
             @RequestParam String numberOfDays,
             @RequestParam String numberOfPeople,
             @RequestParam String name, Model model,
             @RequestParam("file") MultipartFile file,
+            @RequestParam("firstPhoto") MultipartFile firstPhoto,
+            @RequestParam("secondPhoto") MultipartFile secondPhoto,
+            @RequestParam("thirdPhoto") MultipartFile thirdPhoto,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, value = 8) Pageable pageable)
             throws IOException {
-        Date tourDate = Date.valueOf(date);
+        /*Date tourDate = Date.valueOf(date);*/
         BigDecimal price = BigDecimal.valueOf(Integer.valueOf(priceFromFront));
-        tourService.saveTour(text, description, price, tourDate, numberOfDays, numberOfPeople, name, file);
+        tourService.saveTour(text, description, price, date, numberOfDays, numberOfPeople, name, file,firstPhoto,secondPhoto,thirdPhoto);
         Iterable<Tour> tours = tourRepository.findAll(pageable);
         Iterable<Country> countries = countryRepository.findAll(pageable);
         model.addAttribute("page", tours);
@@ -96,7 +102,8 @@ public class AdminController {
 
     @GetMapping("/user/{user}")
     public String userEditForm(@PathVariable User user, Model model) {
-        model.addAttribute("user", user);
+        User userFromDb = userService.findUserByUsername(user.getUsername());
+        model.addAttribute("user", userFromDb);
         model.addAttribute("roles", Role.values());
         return "user-edit";
     }
@@ -106,7 +113,7 @@ public class AdminController {
                              @RequestParam Map<String, String> form,
                              @RequestParam("userId") User user) {
         adminService.updateUser(username, form, user);
-        return "redirect:/user";
+        return "redirect:/admin/user/all";
     }
 
     @GetMapping("/delete/{id}")
@@ -120,5 +127,25 @@ public class AdminController {
     public String userText(Model model) {
         model.addAttribute("users", textRepository.findAll());
         return "user_texts";
+    }
+
+    @GetMapping("/tour/edit/{id}")
+    public String getEditTourPage(@PathVariable(value = "id") Long id, Model model){
+        Tour tour = tourRepository.findTourById(id);
+        model.addAttribute("tour", tour);
+        return "tour_edit";
+    }
+
+    @GetMapping("/tour/delete/{id}")
+    public String getDelete(@PathVariable(value = "id") Long id, Model model){
+        tourService.delete(id);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/country/add")
+    public String addCountry( @RequestParam String countryName,
+                              @RequestParam String countryDescription){
+        adminService.createCountry(countryName, countryDescription);
+        return "redirect:/admin";
     }
 }

@@ -6,7 +6,7 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
     <div class="container profile-container">
-        <h2>Банковский счет</h2>
+        <h1 class="display-5">Личный счет</h1>
         <div class="container">
             <div class="row">
                 <div class="col-sm">
@@ -44,10 +44,12 @@
                                     <div class="col-xs-5 col-md-5 pull-right">
                                         <div class="form-group">
                                             <label for="cvCode">
-                                                CV код</label>
-                                            <input type="password" class="form-control" id="cvCode" placeholder="CV"
-                                                   <#if card_secret_number??>value="${card_secret_number}"</#if>  <#if card_secret_number??>readonly</#if>
-                                                   name="cardSecretNumber" required maxlength="3"/>
+                                                CVV</label>
+                                            <input type="password" class="form-control" id="cvCode" placeholder="CVV"
+                                                   <#if card_secret_number??>
+                                                       value="***"</#if>
+                                                    <#if card_secret_number??>readonly</#if>
+                                                   name="cvv" required maxlength="5"/>
                                         </div>
                                     </div>
                                 </div>
@@ -66,10 +68,11 @@
                         </h4>
                         <div class="input-group">
                             <form action="/user/bank/cash/add" method="post">
-                                <input type="text" class="form-control" name="money" placeholder="Введите сумму в ₸">
+                                <input type="text" class="form-control" name="money" placeholder="Введите сумму в ₸"
+                                       <#if card_secret_number??><#else>readonly</#if>>
                                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                                 </br>
-                                <button type="submit" class="btn btn-secondary">Пополнить</button>
+                                <button type="submit" class="btn btn-secondary" <#if card_secret_number??><#else>disabled</#if>>Пополнить</button>
                             </form>
                         </div>
                     </div>

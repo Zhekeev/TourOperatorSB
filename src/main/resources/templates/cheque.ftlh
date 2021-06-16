@@ -35,7 +35,7 @@
         </div>
     </div>
     <div class="button-page">
-        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#forTour">
+        <button type="button" class="button-login-for-login-page" data-bs-toggle="modal" data-bs-target="#forTour">
             Купить
         </button>
 

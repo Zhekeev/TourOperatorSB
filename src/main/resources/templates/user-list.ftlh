@@ -1,7 +1,7 @@
 <#import "parts/common.ftlh" as c>
 
 <@c.page>
-    <div class="container">
+    <div class="container" style="margin-top: 50px; margin-bottom: 10px!important;">
         <h1 class="display-6">Пользователи</h1>
         <table class="table">
             <thead class="table-dark">

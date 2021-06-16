@@ -18,22 +18,14 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/tour/all" style=" color: white;">Туры</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/contacts" style=" color: white;">Контакты</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/about" style=" color: white;">О нас</a>
-                </li>
                 <#if isAdmin>
                     <li class="nav-item">
-                        <a class="profile-href active" aria-current="page" href="/admin" style=" color: white;"><img
-                                    class="profile-href" src="/static/img/admin-with-cogwheels.png" width="24px"
-                                    height="24px"></a>
+                        <a class="nav-link active" aria-current="page" href="/admin" style=" color: white;">Админ</a>
                     </li>
                 </#if>
-                <#if user??>
+                <#if name!="unknown">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/user/profile" style=" color: white;"><b>${userFirstName} ${userLastName}</b></a>
+                        <a class="nav-link active" aria-current="page" href="/user/profile" style=" color: white;">Профиль</a>
                     </li>
                 </#if>
                 <li class="nav-item">

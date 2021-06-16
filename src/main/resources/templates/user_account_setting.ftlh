@@ -2,7 +2,6 @@
 
 <@c.page>
     <div class="container" style="margin-top: 45px;">
-        <div class="row">
             <div class="col">
                 <div class="mt-2">
                     <h1 class="display-7">Настройка аккаунта</h1>
@@ -20,7 +19,7 @@
                     </div>
                     <div class="input-group mt-2 mb-3">
                         <span class="input-group-text">Номер телефона</span>
-                        <input type="text" name="phoneNumber" class="form-control" value="${user.phone}">
+                        <input type="text" name="phone" class="form-control" value="${user.phone}">
                     </div>
                     <div class="input-group mt-1 mb-3">
                         <span class="input-group-text">ул.</span>
@@ -32,26 +31,8 @@
                     </div>
                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                     <button class="btn btn-outline-primary">Обновить</button>
+                    <a class="btn btn-outline-primary" href="password/change">Сменить пароль</a>
                 </form>
             </div>
-            <div class="col">
-                <form action="/user/password/edit" method="post">
-                    <div class="mt-2">
-                        <h1 class="display-7">Сменить пароль</h1>
-                    </div>
-                    <div class="input-group mt-1 mb-3">
-                        <span class="input-group-text" id="basic-addon2">&#160&#160Новый пароль&#160&#160&#160</span>
-                        <input type="password" name="password" class="form-control" aria-describedby="basic-addon2">
-                    </div>
-                    <div class="input-group mt-1 mb-3">
-                        <span class="input-group-text" id="basic-addon2">Повторите пароль</span>
-                        <input type="password" name="verificationPassword" class="form-control"
-                               aria-describedby="basic-addon2">
-                    </div>
-                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                    <button class="btn btn-outline-primary">Сменить</button>
-                </form>
-            </div>
-        </div>
     </div>
 </@c.page>
